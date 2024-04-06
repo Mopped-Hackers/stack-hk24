@@ -1,0 +1,13 @@
+services:
+  backend:
+    image: ghcr.io/mopped-hackers/backend-hk24:latest
+    ports:
+      - "8000:8000"
+
+
+  frontend:
+    image: ghcr.io/mopped-hackers/frontend-hk24:latest
+    ports:
+      - "80:80"
+    environment:
+      VITE_BACKEND_HOST: "'http://localhost:8000'"
