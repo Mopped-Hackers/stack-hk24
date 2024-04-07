@@ -1,0 +1,26 @@
+name: ACA Update - <APP_NAME>
+on:
+  workflow_dispatch:
+
+permissions:
+      id-token: write
+      contents: read
+
+jobs: 
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Update Running Image
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          imageToDeploy: <IMAGE_URL>
+          containerAppName: <APP_NAME>
+          resourceGroup: <RG_NAME>
